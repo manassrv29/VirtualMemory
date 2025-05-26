@@ -17,7 +17,7 @@ A comprehensive Next.js application that simulates and visualizes page replaceme
 - **Framework**: Next.js 14 with TypeScript
 - **Styling**: Tailwind CSS with custom animations
 - **Charts**: Chart.js with React Chart.js 2
-- **UI Components**: Radix UI primitives
+- **UI Components**: Radix UI(REACT) primitives
 - **Export**: jsPDF and html2canvas
 - **Deployment**: Vercel-optimized
 
@@ -106,19 +106,4 @@ No environment variables are required for basic functionality.
 3. Make your changes
 4. Submit a pull request
 
-## License
 
-This project is licensed under the MIT License.
-\`\`\`
-
-The application is now fully converted from Express.js to Next.js API routes and optimized for Vercel deployment. Key changes include:
-
-1. **Removed Express.js dependency** - All backend logic is now in Next.js API routes
-2. **Added proper error handling** - Enhanced error responses with error codes
-3. **Vercel optimization** - Added vercel.json configuration for optimal deployment
-4. **Health check endpoint** - Added for monitoring and debugging
-5. **CORS handling** - Proper CORS headers for API routes
-6. **Enhanced validation** - Better input validation and error messages
-7. **Response metadata** - Added useful metadata to API responses
-
-The application will now work perfectly on Vercel with full functionality including the backend simulation algorithms, interactive UI, and export capabilities.
