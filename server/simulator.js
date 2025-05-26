@@ -1,17 +1,27 @@
-// Page Replacement Algorithm Implementations
+/**
+ * Page Replacement Algorithm Simulator
+ * Author: Skand Mishra
+ * Description: Simulates FIFO, LRU, and Optimal page replacement algorithms.
+ */
 
-function simulateFIFO(refs, frames) {
-  const memory = new Array(frames).fill(null);
-  const pageFaults = [];
-  const hitRatio = [];
-  const missRatio = [];
-  let faults = 0;
-  let hits = 0;
-  let pointer = 0;
-  const states = [];
+/**
+ * Calculates common statistics for every step
+ */
+const updateStats = (stats, hits, faults, index) => {
+  stats.pageFaults.push(faults);
+  stats.hitRatio.push(hits / (index + 1));
+  stats.missRatio.push(faults / (index + 1));
+};
 
-  for (let i = 0; i < refs.length; i++) {
-    const page = refs[i];
+/**
+ * Simulates First-In-First-Out (FIFO) page replacement
+ */
+const simulateFIFO = (refs, frames) => {
+  const memory = Array(frames).fill(null);
+  const stats = { pageFaults: [], hitRatio: [], missRatio: [], states: [] };
+  let pointer = 0, hits = 0, faults = 0;
+
+  refs.forEach((page, i) => {
     const currentState = {
       step: i + 1,
       page,
@@ -25,40 +35,29 @@ function simulateFIFO(refs, frames) {
       pointer = (pointer + 1) % frames;
       faults++;
       currentState.fault = true;
-      currentState.explanation = `Page ${page} not found in memory (Page Fault). Loading into frame ${pointer}.`;
+      currentState.explanation = `Page ${page} not found (Page Fault). Loaded into frame ${pointer}.`;
     } else {
       hits++;
       currentState.explanation = `Page ${page} found in memory (Page Hit).`;
     }
 
-    states.push(currentState);
-    pageFaults.push(faults);
-    hitRatio.push(hits / (i + 1));
-    missRatio.push(faults / (i + 1));
-  }
+    stats.states.push(currentState);
+    updateStats(stats, hits, faults, i);
+  });
 
-  return {
-    pageFaults,
-    hitRatio,
-    missRatio,
-    states,
-    totalFaults: faults,
-    totalHits: hits
-  };
-}
+  return { ...stats, totalFaults: faults, totalHits: hits };
+};
 
-function simulateLRU(refs, frames) {
-  const memory = new Array(frames).fill(null);
-  const pageFaults = [];
-  const hitRatio = [];
-  const missRatio = [];
-  let faults = 0;
-  let hits = 0;
+/**
+ * Simulates Least Recently Used (LRU) page replacement
+ */
+const simulateLRU = (refs, frames) => {
+  const memory = Array(frames).fill(null);
+  const stats = { pageFaults: [], hitRatio: [], missRatio: [], states: [] };
   const lastUsed = new Map();
-  const states = [];
+  let hits = 0, faults = 0;
 
-  for (let i = 0; i < refs.length; i++) {
-    const page = refs[i];
+  refs.forEach((page, i) => {
     const currentState = {
       step: i + 1,
       page,
@@ -73,23 +72,24 @@ function simulateLRU(refs, frames) {
       if (memory.includes(null)) {
         const emptyIndex = memory.indexOf(null);
         memory[emptyIndex] = page;
-        currentState.explanation = `Page ${page} not found in memory (Page Fault). Loading into empty frame ${emptyIndex}.`;
+        currentState.explanation = `Page ${page} not found (Page Fault). Loaded into empty frame ${emptyIndex}.`;
       } else {
-        let lruPage = memory[0];
-        let lruTime = lastUsed.get(lruPage);
         let replaceIndex = 0;
+        let lruTime = lastUsed.get(memory[0]);
 
         for (let j = 1; j < frames; j++) {
-          if (lastUsed.get(memory[j]) < lruTime) {
-            lruPage = memory[j];
-            lruTime = lastUsed.get(lruPage);
+          const usage = lastUsed.get(memory[j]);
+          if (usage < lruTime) {
+            lruTime = usage;
             replaceIndex = j;
           }
         }
 
+        const replacedPage = memory[replaceIndex];
         memory[replaceIndex] = page;
-        currentState.explanation = `Page ${page} not found in memory (Page Fault). Replacing least recently used page ${lruPage} in frame ${replaceIndex}.`;
+        currentState.explanation = `Page ${page} not found (Page Fault). Replaced LRU page ${replacedPage} in frame ${replaceIndex}.`;
       }
+
       faults++;
       currentState.fault = true;
     } else {
@@ -97,33 +97,22 @@ function simulateLRU(refs, frames) {
       currentState.explanation = `Page ${page} found in memory (Page Hit).`;
     }
 
-    states.push(currentState);
-    pageFaults.push(faults);
-    hitRatio.push(hits / (i + 1));
-    missRatio.push(faults / (i + 1));
-  }
+    stats.states.push(currentState);
+    updateStats(stats, hits, faults, i);
+  });
 
-  return {
-    pageFaults,
-    hitRatio,
-    missRatio,
-    states,
-    totalFaults: faults,
-    totalHits: hits
-  };
-}
+  return { ...stats, totalFaults: faults, totalHits: hits };
+};
 
-function simulateOptimal(refs, frames) {
-  const memory = new Array(frames).fill(null);
-  const pageFaults = [];
-  const hitRatio = [];
-  const missRatio = [];
-  let faults = 0;
-  let hits = 0;
-  const states = [];
+/**
+ * Simulates Optimal page replacement
+ */
+const simulateOptimal = (refs, frames) => {
+  const memory = Array(frames).fill(null);
+  const stats = { pageFaults: [], hitRatio: [], missRatio: [], states: [] };
+  let hits = 0, faults = 0;
 
-  for (let i = 0; i < refs.length; i++) {
-    const page = refs[i];
+  refs.forEach((page, i) => {
     const currentState = {
       step: i + 1,
       page,
@@ -136,18 +125,17 @@ function simulateOptimal(refs, frames) {
       if (memory.includes(null)) {
         const emptyIndex = memory.indexOf(null);
         memory[emptyIndex] = page;
-        currentState.explanation = `Page ${page} not found in memory (Page Fault). Loading into empty frame ${emptyIndex}.`;
+        currentState.explanation = `Page ${page} not found (Page Fault). Loaded into empty frame ${emptyIndex}.`;
       } else {
-        let farthest = -1;
         let replaceIndex = 0;
+        let farthest = -1;
 
         for (let j = 0; j < frames; j++) {
           const nextUse = refs.indexOf(memory[j], i + 1);
           if (nextUse === -1) {
             replaceIndex = j;
             break;
-          }
-          if (nextUse > farthest) {
+          } else if (nextUse > farthest) {
             farthest = nextUse;
             replaceIndex = j;
           }
@@ -155,8 +143,9 @@ function simulateOptimal(refs, frames) {
 
         const replacedPage = memory[replaceIndex];
         memory[replaceIndex] = page;
-        currentState.explanation = `Page ${page} not found in memory (Page Fault). Replacing page ${replacedPage} in frame ${replaceIndex} as it won't be used for the longest time.`;
+        currentState.explanation = `Page ${page} not found (Page Fault). Replaced page ${replacedPage} in frame ${replaceIndex} (used farthest in future).`;
       }
+
       faults++;
       currentState.fault = true;
     } else {
@@ -164,21 +153,12 @@ function simulateOptimal(refs, frames) {
       currentState.explanation = `Page ${page} found in memory (Page Hit).`;
     }
 
-    states.push(currentState);
-    pageFaults.push(faults);
-    hitRatio.push(hits / (i + 1));
-    missRatio.push(faults / (i + 1));
-  }
+    stats.states.push(currentState);
+    updateStats(stats, hits, faults, i);
+  });
 
-  return {
-    pageFaults,
-    hitRatio,
-    missRatio,
-    states,
-    totalFaults: faults,
-    totalHits: hits
-  };
-}
+  return { ...stats, totalFaults: faults, totalHits: hits };
+};
 
 module.exports = {
   simulateFIFO,
