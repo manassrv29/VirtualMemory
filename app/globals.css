@@ -1,0 +1,229 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.5s ease-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-pulse-custom {
+  animation: pulse 2s infinite;
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Frame visualization styles */
+.frame-container {
+  @apply grid gap-2 justify-center;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.frame {
+  @apply w-16 h-16 border-2 rounded-lg flex items-center justify-center font-bold text-lg transition-all duration-300;
+}
+
+.frame.empty {
+  @apply border-gray-300 bg-gray-50 text-gray-400;
+}
+
+.frame.filled {
+  @apply border-blue-500 bg-blue-50 text-blue-700;
+}
+
+.frame.hit {
+  @apply border-green-500 bg-green-50 text-green-700 scale-110 shadow-lg;
+}
+
+.frame.fault {
+  @apply border-red-500 bg-red-50 text-red-700 scale-110 shadow-lg;
+}
+
+/* Table styles */
+.simulation-table {
+  @apply w-full border-collapse rounded-lg overflow-hidden shadow-sm;
+}
+
+.simulation-table th {
+  @apply bg-gray-100 px-4 py-3 text-left font-semibold text-gray-700 border-b;
+}
+
+.simulation-table td {
+  @apply px-4 py-3 border-b border-gray-200;
+}
+
+.simulation-table tr:hover {
+  @apply bg-gray-50;
+}
+
+.simulation-table tr.active {
+  @apply bg-blue-50 border-blue-200;
+}
+
+/* Chart container */
+.chart-container {
+  @apply relative w-full h-64 p-4 bg-white rounded-lg shadow-sm;
+}
+
+/* Responsive grid */
+.results-grid {
+  @apply grid gap-6;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* Loading spinner */
+.loading-spinner {
+  @apply inline-block w-6 h-6 border-2 border-gray-300 border-t-blue-600 rounded-full animate-spin;
+}
+
+/* Export buttons */
+.export-buttons {
+  @apply flex flex-wrap gap-2 justify-center;
+}
+
+/* Professional gradient backgrounds */
+.gradient-bg {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.gradient-card {
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+}
+
+/* Memory visualization */
+.memory-block {
+  @apply relative overflow-hidden rounded-lg border-2 transition-all duration-300;
+}
+
+.memory-block::before {
+  content: "";
+  @apply absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 transition-opacity duration-300;
+  transform: translateX(-100%);
+}
+
+.memory-block.highlight::before {
+  @apply opacity-30;
+  animation: shimmer 1s ease-in-out;
+}
+
+/* Step indicator */
+.step-indicator {
+  @apply flex items-center justify-center w-8 h-8 rounded-full font-bold text-sm transition-all duration-300;
+}
+
+.step-indicator.active {
+  @apply bg-blue-600 text-white scale-110;
+}
+
+.step-indicator.completed {
+  @apply bg-green-600 text-white;
+}
+
+.step-indicator.pending {
+  @apply bg-gray-300 text-gray-600;
+}

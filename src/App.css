@@ -1,0 +1,1012 @@
+.App {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 2rem 0;
+}
+
+/* Enhanced Heading Styles */
+.heading-container {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  animation: slideDown 0.8s ease-out;
+}
+
+.heading-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #4a90e2, #357abd, #4a90e2);
+  animation: gradientMove 3s linear infinite;
+}
+
+.heading-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+.main-heading {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #2c3e50;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 0 1rem;
+}
+
+.heading-line {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #4a90e2);
+  position: relative;
+  animation: lineGrow 1s ease-out forwards;
+}
+
+.heading-line:last-child {
+  background: linear-gradient(90deg, #4a90e2, transparent);
+}
+
+.heading-decoration {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.decoration-dot {
+  width: 8px;
+  height: 8px;
+  background: #4a90e2;
+  border-radius: 50%;
+  animation: dotPulse 2s infinite;
+}
+
+.decoration-dot:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.decoration-dot:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.sub-heading {
+  font-size: 1.2rem;
+  color: #666;
+  margin-top: 1.5rem;
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  padding: 0 2rem;
+}
+
+.sub-heading::before,
+.sub-heading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 30px;
+  height: 1px;
+  background: #4a90e2;
+  opacity: 0.5;
+}
+
+.sub-heading::before {
+  left: 0;
+}
+
+.sub-heading::after {
+  right: 0;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes lineGrow {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 60px;
+    opacity: 1;
+  }
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+}
+
+/* General Layout Enhancements */
+.container {
+    max-width: 1200px; /* Set a max width for better readability */
+    margin: 0 auto; /* Center the container */
+    padding: 0 15px; /* Add some padding on smaller screens */
+}
+
+.simulator {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    margin-top: 30px; /* Add space below heading */
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem; /* Consistent spacing */
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9); /* Slightly more opaque */
+    backdrop-filter: blur(10px);
+    overflow: hidden; /* Ensure content respects border-radius */
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-title {
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    font-size: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+/* Simulation Mode Selector Styles */
+.simulation-mode-selector .card-body {
+    padding: 15px 20px;
+}
+
+.simulation-mode-selector h5.card-title {
+    font-size: 1.1rem;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    margin-right: 15px;
+}
+
+.form-select.form-select-sm.w-auto {
+    padding: 0.25rem 1rem;
+    font-size: 0.875rem;
+}
+
+/* Input Fields Card Styles */
+.form-group.card {
+    margin-bottom: 0; /* Remove default form-group margin when inside card */
+}
+
+.form-group.card-body {
+     padding: 1rem 1.5rem;
+}
+
+.form-group label {
+    margin-bottom: 0.5rem; /* Adjust label margin */
+}
+
+/* Control Panel Styles */
+.control-panel {
+  display: flex;
+  flex-direction: column; /* Stack title and body vertically */
+  gap: 1rem; /* Space between title and body */
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.control-panel .card-body > div:first-child { /* Target the main d-flex container inside card-body */
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap */
+  gap: 1rem; /* Adjust gap between groups */
+  align-items: center;
+  width: 100%;
+  justify-content: center; /* Default centering */
+}
+
+/* Style for the button groups */
+.button-group {
+  display: flex;
+  gap: 0.75rem; /* Space between buttons within a group */
+  flex-wrap: wrap; /* Allow buttons within the group to wrap */
+  flex-shrink: 0; /* Prevent button groups from shrinking */
+  flex-grow: 0; /* Prevent button groups from growing */
+  flex-basis: auto; /* Base size determined by content */
+  min-width: 280px; /* Ensure button groups have a reasonable minimum width */
+  justify-content: center; /* Center buttons within the group */
+}
+
+/* Adjust the conditional controls div to take available space but wrap */
+.control-panel .card-body > div:first-child > div:nth-child(2) { /* Target the div containing conditional controls */
+    flex-grow: 1; /* Allow to grow and take space */
+    flex-shrink: 1; /* Allow shrinking */
+    flex-basis: 300px; /* Suggest a base width before growing/shrinking */
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Adjust gap within conditional controls */
+    flex-wrap: wrap; /* Ensure conditional controls wrap */
+    justify-content: center; /* Center conditional controls in the middle */
+    min-width: 200px; /* Minimum width for the conditional controls area */
+}
+
+/* Responsive adjustments for layout */
+@media (min-width: 769px) {
+    .control-panel .card-body > div:first-child {
+        justify-content: space-between; /* Distribute space between items on larger screens */
+    }
+
+    .button-group {
+        justify-content: flex-start; /* Align buttons to the start within their group on larger screens */
+        min-width: auto; /* Remove min-width constraint on larger screens */
+        flex-basis: auto; /* Allow flex-basis to be determined by content */
+    }
+
+     .control-panel .card-body > div:first-child > div:nth-child(2) { /* Conditional controls */
+        flex-basis: auto; /* Allow flex-basis to be determined by content */
+        justify-content: center; /* Center conditional controls */
+    }
+
+    /* Explicitly set order to ensure Run/Stop, Conditional, Export flow */
+    .control-panel .card-body > div:first-child > .button-group:nth-child(1) { order: 1; }
+    .control-panel .card-body > div:first-child > div:nth-child(2) { order: 2; }
+    .control-panel .card-body > div:first-child > .button-group:nth-child(3) { order: 3; }
+
+}
+
+/* Ensure core buttons are visible even if container is small */
+.control-panel .card-body > div:first-child > .button-group:nth-child(1),
+.control-panel .card-body > div:first-child > .button-group:nth-child(3) {
+    /* These styles are to strongly ensure visibility */
+    position: relative; /* Or static, but relative is safer with z-index */
+    z-index: 1; /* Ensure they are above other potential elements */
+    /* Consider adding a background if needed, though card background should suffice */
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  min-width: 120px; /* Ensure individual buttons have a minimum width */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, #4a90e2, #357abd);
+  border: none;
+  color: white;
+}
+
+.btn-danger {
+  background: linear-gradient(45deg, #dc3545, #c82333);
+  border: none;
+  color: white;
+}
+
+.btn-secondary {
+  background: linear-gradient(45deg, #6c757d, #495057);
+  border: none;
+  color: white;
+}
+
+.btn-success {
+  background: linear-gradient(45deg, #28a745, #218838);
+  border: none;
+  color: white;
+}
+
+.btn-info {
+  background: linear-gradient(45deg, #17a2b8, #138496);
+  border: none;
+  color: white;
+}
+
+.speed-control {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  min-width: 200px; /* Adjusted minimum width for speed control */
+  flex-grow: 1; /* Allow speed control to grow within its container */
+}
+
+.speed-control label {
+  margin: 0;
+  font-weight: 500;
+  color: #2c3e50;
+  white-space: nowrap;
+}
+
+.speed-value {
+  font-weight: 600;
+  color: #4a90e2;
+  min-width: 50px; /* Adjusted minimum width */
+  text-align: right;
+}
+
+.form-range {
+  flex: 1;
+  height: 6px;
+  background: #e9ecef;
+  border-radius: 3px;
+  -webkit-appearance: none;
+}
+
+.form-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #4a90e2;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.form-range::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
+}
+
+/* Overall Results Styles (refined) */
+.overall-results .card-body {
+    padding: 1.5rem;
+}
+
+.overall-results h3 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 1.5rem;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.results-summary {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.result-item {
+  text-align: center;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  flex: 1; /* Allow items to grow */
+  min-width: 150px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.result-item h4 {
+  margin-top: 0;
+  color: #4a90e2;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.result-item p {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Frame Visualization Styles (refined) */
+.frame-visualization.card-body {
+    padding: 1.5rem;
+}
+
+.frame-visualization h5.card-title {
+    margin-bottom: 1.5rem; /* More space below title */
+}
+
+.frames-container {
+  display: flex;
+  gap: 15px;
+  justify-content: center; /* Center frames */
+  margin: 20px 0; /* Space above and below */
+  flex-wrap: wrap;
+}
+
+.frame {
+  width: 70px; /* Adjusted size */
+  height: 70px; /* Adjusted size */
+  border: 2px solid #ddd;
+  border-radius: 8px; /* Rounded corners */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px; /* Adjusted font size */
+  font-weight: bold;
+  background: #f8f9fa; /* Light background */
+  transition: all 0.3s ease; /* Smooth transitions */
+}
+
+.frame.hit {
+  border-color: #28a745; /* Green border for hit */
+  background: #e8f5e9; /* Light green background */
+  color: #218838; /* Darker green text */
+  transform: scale(1.1); /* Slightly larger on hit */
+  box-shadow: 0 0 10px rgba(40, 167, 69, 0.3); /* Green shadow */
+}
+
+.frame.fault {
+   border-color: #dc3545; /* Red border for fault */
+   background: #f8d7da; /* Light red background */
+   color: #c82333; /* Darker red text */
+   transform: scale(1.1); /* Slightly larger on fault */
+   box-shadow: 0 0 10px rgba(220, 53, 69, 0.3); /* Red shadow */
+}
+
+.explanation-box {
+  background: #f8f9fa;
+  border-left: 4px solid #4a90e2; /* Add a colored border */
+  border-radius: 0 8px 8px 0; /* Round right corners */
+  padding: 15px;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+}
+
+.explanation-box h4 {
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.explanation-box p {
+  color: #666;
+  line-height: 1.6;
+  white-space: pre-line; /* Preserve line breaks from backend */
+  font-size: 0.95rem;
+}
+
+/* Table Visualization Styles (refined) */
+.table-visualization .card-body {
+     padding: 1.5rem;
+}
+
+.table-visualization h5.card-title {
+    margin-bottom: 1.5rem;
+}
+
+.table-responsive {
+    overflow-x: auto; /* Add horizontal scroll on small screens */
+}
+
+.table-visualization table {
+  width: 100%;
+  border-collapse: separate; /* Use separate to control spacing and border-radius */
+  border-spacing: 0;
+  margin-top: 15px;
+  border-radius: 8px; /* Rounded corners for the whole table */
+  overflow: hidden; /* Hide overflow from rounded corners */
+}
+
+.table-visualization th,
+.table-visualization td {
+  border: none; /* Remove default borders */
+  padding: 12px 8px;
+  text-align: center;
+}
+
+.table-visualization thead tr {
+    background-color: #e9ecef; /* Light grey background for header */
+}
+
+.table-visualization th {
+  font-weight: bold;
+  color: #2c3e50; /* Darker text color */
+  border-bottom: 2px solid #dee2e6; /* Separator line */
+}
+
+.table-visualization tbody tr:nth-child(even) {
+  background-color: #f8f9fa; /* Lighter background for even rows */
+}
+
+.table-visualization tbody tr:hover {
+  background-color: #e2e6ea; /* Highlight on hover */
+}
+
+.table-visualization td {
+    border-bottom: 1px solid #e9ecef; /* Separator line between rows */
+    color: #555; /* Slightly lighter text color */
+}
+
+.table-visualization tbody tr:last-child td {
+    border-bottom: none; /* Remove bottom border from last row */
+}
+
+.table-visualization .active-step {
+  background-color: #d4edda; /* Light green for active step */
+  font-weight: bold;
+  color: #155724; /* Dark green text */
+}
+
+.table-visualization .active-step td {
+     border-bottom-color: #c3e6cb; /* Match active step border */
+}
+
+/* Page Fault Analysis Charts Styles */
+.graph-grid.animate-fade-in {
+     animation: fadeIn 0.5s ease forwards;
+}
+
+.graph-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust grid to be more flexible and smaller */
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.graph-grid > .card {
+    height: 100%;
+}
+
+.graph-grid .card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.graph-grid .card-title {
+    flex-shrink: 0;
+}
+
+.chart-container {
+  position: relative;
+  flex-grow: 1;
+  margin: auto;
+  padding: 0.75rem; /* Reduced padding */
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  min-height: 200px; /* Slightly reduced minimum height */
+  max-height: 300px; /* Set a maximum height */
+  width: 100%; /* Ensure it takes full width of its container */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .simulator {
+        padding: 1rem;
+    }
+
+    .control-panel .d-flex {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .control-panel .card-body > .d-flex > .button-group:nth-child(1),
+    .control-panel .card-body > .d-flex > .button-group:nth-child(2),
+    .control-panel .card-body > .d-flex > div:nth-child(2) {
+        grid-column: 1;
+        justify-content: center;
+    }
+
+    .control-panel .card-body > .d-flex > div:nth-child(2) {
+        gap: 1rem;
+    }
+
+    .frame {
+        width: 50px;
+        height: 50px;
+        font-size: 18px;
+    }
+
+    .frames-container {
+         gap: 10px;
+    }
+
+    .table-visualization th,
+    .table-visualization td {
+      padding: 8px 4px;
+       font-size: 0.9rem;
+    }
+
+     .chart-container {
+        min-height: 180px; /* Further reduce min height on mobile */
+        max-height: 250px; /* Further reduce max height on mobile */
+     }
+
+     .overall-results h3, .table-visualization h3, .card-title {
+        font-size: 1.3rem;
+     }
+
+    .explanation-box {
+        padding: 10px;
+    }
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.form-control {
+  border-radius: 8px;
+  border: 2px solid #e0e0e0;
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  background-color: #f8f9fa;
+}
+
+.form-control:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+  background-color: #fff;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.btn:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, #4a90e2, #357abd);
+  border: none;
+}
+
+.btn-secondary {
+  background: linear-gradient(45deg, #6c757d, #495057);
+  border: none;
+}
+
+.btn-success {
+  background: linear-gradient(45deg, #28a745, #218838);
+  border: none;
+}
+
+.btn-info {
+  background: linear-gradient(45deg, #17a2b8, #138496);
+  border: none;
+}
+
+.btn:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+  transform: none;
+}
+
+select[multiple] {
+  height: 150px;
+  padding: 0.5rem;
+}
+
+select[multiple] option {
+  padding: 0.5rem;
+  margin: 2px 0;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+select[multiple] option:hover {
+  background-color: #e9ecef;
+}
+
+select[multiple] option:checked {
+  background-color: #4a90e2;
+  color: white;
+}
+
+/* Animation classes */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.5s ease forwards;
+}
+
+/* Graph grid layout */
+.graph-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* Loading animation */
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #4a90e2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Tooltip styles */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  background-color: #2c3e50;
+  color: #fff;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Memory Animation Styles */
+.memory-animation {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.memory-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.virtual-memory,
+.physical-memory,
+.tlb,
+.page-table {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.memory-blocks {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.memory-block {
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 0.75rem;
+  text-align: center;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.memory-block.active {
+  background: #4a90e2;
+  color: white;
+  border-color: #357abd;
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(74, 144, 226, 0.3);
+}
+
+.tlb-blocks,
+.page-table-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tlb-block,
+.page-table-block {
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 0.5rem;
+  text-align: center;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.animation-status {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.status-item {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.status-item.hit {
+  background: #28a745;
+  color: white;
+}
+
+.status-item.fault {
+  background: #dc3545;
+  color: white;
+}
+
+/* Animation Classes */
+@keyframes scaleIn {
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.scale-in {
+  animation: scaleIn 0.3s ease forwards;
+}
+
+/* Table Visualization Styles */
+.table-visualization {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table-visualization table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.table-visualization th,
+.table-visualization td {
+  border: 1px solid #ddd;
+  padding: 12px 8px;
+  text-align: center;
+}
+
+.table-visualization th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  color: #333;
+}
+
+.table-visualization tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.table-visualization tbody tr:hover {
+  background-color: #e9e9e9;
+}
+
+.table-visualization .active-step {
+  background-color: #e8f5e9; /* Light green for active step */
+  font-weight: bold;
+}
+
+.form-group.card input:disabled,
+.form-group.card select:disabled {
+    opacity: 0.75; /* Increased opacity for better visibility */
+    cursor: not-allowed;
+}
